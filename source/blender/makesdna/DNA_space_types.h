@@ -93,7 +93,7 @@ typedef struct SpaceInfo {
 	int spacetype;
 	float blockscale DNA_DEPRECATED;
 	short blockhandler[8]  DNA_DEPRECATED;      /* XXX make deprecated */
-	
+
 	char rpt_mask;
 	char pad[7];
 } SpaceInfo;
@@ -116,18 +116,18 @@ typedef struct SpaceButs {
 	ListBase regionbase;        /* storage of regions for inactive spaces */
 	int spacetype;
 	float blockscale DNA_DEPRECATED;
-	
+
 	short blockhandler[8]  DNA_DEPRECATED;
 
 	View2D v2d DNA_DEPRECATED;                      /* deprecated, copied to region */
-	
+
 	short mainb, mainbo, mainbuser; /* context tabs */
 	short re_align, align;          /* align for panels */
 	short preview;                  /* preview is signal to refresh */
 	/* texture context selector (material, lamp, particles, world, other) */
 	short texture_context, texture_context_prev;
 	char flag, pad[7];
-	
+
 	void *path;                     /* runtime */
 	int pathflag, dataicon;         /* runtime */
 	ID *pinid;
@@ -181,7 +181,7 @@ typedef enum eSpaceButtons_Context {
 	BCONTEXT_CONSTRAINT = 11,
 	BCONTEXT_BONE_CONSTRAINT = 12,
 	BCONTEXT_RENDER_LAYER = 13,
-	
+
 	/* always as last... */
 	BCONTEXT_TOT
 } eSpaceButtons_Context;
@@ -240,9 +240,9 @@ typedef struct SpaceOops {
 	short blockhandler[8]  DNA_DEPRECATED;
 
 	View2D v2d DNA_DEPRECATED;  /* deprecated, copied to region */
-	
+
 	ListBase tree;
-	
+
 	/* treestore is an ordered list of TreeStoreElem's from outliner tree;
 	 * Note that treestore may contain duplicate elements if element
 	 * is used multiple times in outliner tree (e. g. linked objects)
@@ -250,13 +250,13 @@ typedef struct SpaceOops {
 	 * therefore readfile.c/writefile.c linearize treestore into TreeStore structure
 	 */
 	struct BLI_mempool *treestore;
-	
+
 	/* search stuff */
 	char search_string[64];
 	struct TreeStoreElem search_tse;
 
 	short flag, outlinevis, storeflag, search_flags;
-	
+
 	/* pointers to treestore elements, grouped by (id, type, nr) in hashtable for faster searching */
 	void *treehash;
 } SpaceOops;
@@ -318,17 +318,17 @@ typedef struct SpaceIpo {
 	int spacetype;
 	float blockscale DNA_DEPRECATED;
 	short blockhandler[8]  DNA_DEPRECATED;
-	
+
 	View2D v2d DNA_DEPRECATED;  /* deprecated, copied to region */
-	
+
 	struct bDopeSheet *ads; /* settings for filtering animation data (NOTE: we use a pointer due to code-linking issues) */
-	
+
 	ListBase ghostCurves;   /* sampled snapshots of F-Curves used as in-session guides */
-	
+
 	short mode;             /* mode for the Graph editor (eGraphEdit_Mode) */
 	short autosnap;         /* time-transform autosnapping settings for Graph editor (eAnimEdit_AutoSnap in DNA_action_types.h) */
 	int flag;               /* settings for Graph editor (eGraphEdit_Flag) */
-	
+
 	float cursorTime;       /* time value for cursor (when in drivers mode; animation uses current frame) */
 	float cursorVal;        /* cursor value (y-value, x-value is current frame) */
 	int around;             /* pivot point for transforms */
@@ -340,7 +340,7 @@ typedef struct SpaceIpo {
 typedef enum eGraphEdit_Flag {
 	/* OLD DEPRECEATED SETTING */
 	/* SIPO_LOCK_VIEW            = (1 << 0), */
-	
+
 	/* don't merge keyframes on the same frame after a transform */
 	SIPO_NOTRANSKEYCULL       = (1 << 1),
 	/* don't show any keyframe handles at all */
@@ -395,7 +395,7 @@ typedef struct SpaceNla {
 	short autosnap;         /* this uses the same settings as autosnap for Action Editor */
 	short flag;
 	int pad;
-	
+
 	struct bDopeSheet *ads;
 	View2D v2d DNA_DEPRECATED;   /* deprecated, copied to region */
 } SpaceNla;
@@ -433,7 +433,7 @@ typedef struct SpaceTime {
 	ListBase regionbase;        /* storage of regions for inactive spaces */
 	int spacetype;
 	float blockscale DNA_DEPRECATED;
-	
+
 	View2D v2d DNA_DEPRECATED;  /* deprecated, copied to region */
 
 	ListBase caches;
@@ -493,7 +493,7 @@ typedef struct SpaceSeq {
 	short blockhandler[8]  DNA_DEPRECATED;
 
 	View2D v2d DNA_DEPRECATED;  /* deprecated, copied to region */
-	
+
 	float xof DNA_DEPRECATED, yof DNA_DEPRECATED;   /* deprecated: offset for drawing the image preview */
 	short mainb;    /* weird name for the sequencer subtype (seq, image, luma... etc) */
 	short render_size;  /* eSpaceSeq_Proxy_RenderSize */
@@ -584,6 +584,44 @@ typedef enum eSpaceSeq_OverlayType {
 	SEQ_DRAW_OVERLAY_CURRENT = 2
 } eSpaceSeq_OverlayType;
 
+/* Shot Editor ============================================ */
+
+/* Shot Editor */
+
+typedef struct SpaceShot {
+	SpaceLink *next, *prev;
+	ListBase regionbase;        /* storage of regions for inactive spaces */
+	int spacetype;
+	char pad[4];
+	// float blockscale DNA_DEPRECATED;
+  //
+	// short blockhandler[8]  DNA_DEPRECATED;
+  //
+	// View2D v2d DNA_DEPRECATED;  /* deprecated, copied to region */
+  //
+	// float xof DNA_DEPRECATED, yof DNA_DEPRECATED;   /* deprecated: offset for drawing the image preview */
+	// short mainb;    /* weird name for the sequencer subtype (seq, image, luma... etc) */
+	// short render_size;  /* eSpaceSeq_Proxy_RenderSize */
+	// short chanshown;
+	// short zebra;
+	// int flag;
+	// float zoom DNA_DEPRECATED;  /* deprecated, handled by View2D now */
+	// int view; /* see SEQ_VIEW_* below */
+	// int overlay_type;
+	// int draw_flag; /* overlay an image of the editing on below the strips */
+	// int pad;
+  //
+	// struct bGPdata *gpd;        /* grease-pencil data */
+  //
+	// struct SequencerScopes scopes;  /* different scoped displayed in space */
+  //
+	// char multiview_eye;				/* multiview current eye - for internal use */
+	// char pad2[7];
+  //
+	// struct GPUFX *compositor;
+	// void *pad3;
+} SpaceShot;
+
 /* File Selector ========================================== */
 
 /* Config and Input for File Selector */
@@ -629,28 +667,28 @@ typedef struct SpaceFile {
 	SpaceLink *next, *prev;
 	ListBase regionbase;        /* storage of regions for inactive spaces */
 	int spacetype;
-	
+
 	int scroll_offset;
 
 	struct FileSelectParams *params; /* config and input for file select */
-	
+
 	struct FileList *files; /* holds the list of files to show */
 
 	ListBase *folders_prev; /* holds the list of previous directories to show */
 	ListBase *folders_next; /* holds the list of next directories (pushed from previous) to show */
 
-	/* operator that is invoking fileselect 
+	/* operator that is invoking fileselect
 	 * op->exec() will be called on the 'Load' button.
 	 * if operator provides op->cancel(), then this will be invoked
 	 * on the cancel button.
 	 */
-	struct wmOperator *op; 
+	struct wmOperator *op;
 
 	struct wmTimer *smoothscroll_timer;
 	struct wmTimer *previews_timer;
 
 	struct FileLayout *layout;
-	
+
 	short recentnr, bookmarknr;
 	short systemnr, system_bookmarknr;
 } SpaceFile;
@@ -958,14 +996,14 @@ typedef enum eSpaceImage_Flag {
 	SI_USE_ALPHA          = (1 << 12),
 	SI_SHOW_ALPHA         = (1 << 13),
 	SI_SHOW_ZBUF          = (1 << 14),
-	
+
 	/* next two for render window display */
 	SI_PREVSPACE          = (1 << 15),
 	SI_FULLWINDOW         = (1 << 16),
-	
+
 /*	SI_DEPRECATED4        = (1 << 17), */  /* deprecated */
 /*	SI_DEPRECATED5        = (1 << 18), */  /* deprecated */
-	
+
 	/* this means that the image is drawn until it reaches the view edge,
 	 * in the image view, it's unrelated to the 'tile' mode for texface
 	 */
@@ -1040,13 +1078,13 @@ typedef enum eSpaceText_Flags {
 	/* scrollable */
 	ST_SCROLL_SELECT        = (1 << 0),
 	/* clear namespace after script execution (BPY_main.c) */
-	ST_CLEAR_NAMESPACE      = (1 << 4), 
-	
+	ST_CLEAR_NAMESPACE      = (1 << 4),
+
 	ST_FIND_WRAP            = (1 << 5),
 	ST_FIND_ALL             = (1 << 6),
 	ST_SHOW_MARGIN          = (1 << 7),
 	ST_MATCH_CASE           = (1 << 8),
-	
+
 	ST_FIND_ACTIVATE		= (1 << 9),
 } eSpaceText_Flags;
 
@@ -1082,7 +1120,7 @@ typedef struct SpaceScript {
 
 	short flags, menunr;
 	int pad1;
-	
+
 	void *but_refs;
 } SpaceScript;
 
@@ -1092,12 +1130,12 @@ typedef struct SpaceScript {
 
 typedef struct bNodeTreePath {
 	struct bNodeTreePath *next, *prev;
-	
+
 	struct bNodeTree *nodetree;
 	bNodeInstanceKey parent_key;	/* base key for nodes in this tree instance */
 	int pad;
 	float view_center[2];			/* v2d center point, so node trees can have different offsets in editors */
-	
+
 	char node_name[64];		/* MAX_NAME */
 } bNodeTreePath;
 
@@ -1107,31 +1145,31 @@ typedef struct SpaceNode {
 	int spacetype;
 	float blockscale DNA_DEPRECATED;
 	short blockhandler[8]  DNA_DEPRECATED;
-	
+
 	View2D v2d DNA_DEPRECATED;  /* deprecated, copied to region */
-	
+
 	struct ID *id, *from;       /* context, no need to save in file? well... pinning... */
 	short flag, pad1;           /* menunr: browse id block in header */
 	float aspect, pad2;	/* internal state variables */
-	
+
 	float xof, yof;     /* offset for drawing the backdrop */
 	float zoom;   /* zoom for backdrop */
 	float cursor[2];    /* mouse pos for drawing socketless link and adding nodes */
-	
+
 	/* XXX nodetree pointer info is all in the path stack now,
 	 * remove later on and use bNodeTreePath instead. For now these variables are set when pushing/popping
 	 * from path stack, to avoid having to update all the functions and operators. Can be done when
 	 * design is accepted and everything is properly tested.
 	 */
 	ListBase treepath;
-	
+
 	struct bNodeTree *nodetree, *edittree;
-	
+
 	/* tree type for the current node tree */
 	char tree_idname[64];
 	int treetype DNA_DEPRECATED; /* treetype: as same nodetree->type */
 	int pad3;
-	
+
 	short texfrom;       /* texfrom object, world or brush */
 	short shaderfrom;    /* shader from object or world */
 	short recalc;        /* currently on 0/1, for auto compo */
@@ -1157,7 +1195,7 @@ typedef enum eSpaceNode_Flag {
 	SNODE_SHOW_B         = (1 << 9),
 	SNODE_AUTO_RENDER    = (1 << 5),
 //	SNODE_SHOW_HIGHLIGHT = (1 << 6), DNA_DEPRECATED
-//	SNODE_USE_HIDDEN_PREVIEW = (1 << 10), DNA_DEPRECATED December2013 
+//	SNODE_USE_HIDDEN_PREVIEW = (1 << 10), DNA_DEPRECATED December2013
 	SNODE_NEW_SHADERS    = (1 << 11),
 	SNODE_PIN            = (1 << 12),
 	SNODE_SKIP_INSOFFSET = (1 << 13), /* automatically offset following nodes in a chain on insertion */
@@ -1192,12 +1230,12 @@ typedef struct SpaceLogic {
 	ListBase regionbase;        /* storage of regions for inactive spaces */
 	int spacetype;
 	float blockscale DNA_DEPRECATED;
-	
+
 	short blockhandler[8]  DNA_DEPRECATED;
-	
+
 	short flag, scaflag;
 	int pad;
-	
+
 	struct bGPdata *gpd;        /* grease-pencil data */
 } SpaceLogic;
 
@@ -1206,12 +1244,12 @@ typedef struct SpaceLogic {
 /* Console content */
 typedef struct ConsoleLine {
 	struct ConsoleLine *next, *prev;
-	
+
 	/* keep these 3 vars so as to share free, realloc funcs */
 	int len_alloc;  /* allocated length */
 	int len;    /* real len - strlen() */
-	char *line; 
-	
+	char *line;
+
 	int cursor;
 	int type; /* only for use when in the 'scrollback' listbase */
 } ConsoleLine;
@@ -1232,7 +1270,7 @@ typedef struct SpaceConsole {
 	int spacetype;
 	float blockscale DNA_DEPRECATED;            // XXX are these needed?
 	short blockhandler[8]  DNA_DEPRECATED;      // XXX are these needed?
-	
+
 	/* space vars */
 	int lheight, pad;
 
@@ -1240,7 +1278,7 @@ typedef struct SpaceConsole {
 	ListBase history; /* ConsoleLine; command history, current edited line is the first */
 	char prompt[256];
 	char language[32]; /* multiple consoles are possible, not just python */
-	
+
 	int sel_start;
 	int sel_end;
 } SpaceConsole;
@@ -1253,7 +1291,7 @@ typedef struct SpaceUserPref {
 	SpaceLink *next, *prev;
 	ListBase regionbase;        /* storage of regions for inactive spaces */
 	int spacetype;
-	
+
 	char pad[3];
 	char filter_type;
 	char filter[64];        /* search term for filtering in the UI */
@@ -1377,8 +1415,9 @@ typedef enum eSpace_Type {
 	SPACE_CONSOLE  = 18,
 	SPACE_USERPREF = 19,
 	SPACE_CLIP     = 20,
-	
-	SPACEICONMAX = SPACE_CLIP
+	SPACE_SHOT     = 21,
+
+	SPACEICONMAX = SPACE_SHOT
 } eSpace_Type;
 
 /* use for function args */

@@ -51,7 +51,7 @@ endmacro()
 function(list_assert_duplicates
 	list_id
 	)
-	
+
 	# message(STATUS "list data: ${list_id}")
 
 	list(LENGTH list_id _len_before)
@@ -571,6 +571,7 @@ function(SETUP_BLENDER_SORTED_LIBS)
 		bf_editor_space_userpref
 		bf_editor_space_view3d
 		bf_editor_space_clip
+		bf_editor_space_shot
 
 		bf_editor_transform
 		bf_editor_util
